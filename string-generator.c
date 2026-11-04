@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
+#define CONTAINER_SIZE 10
 
 typedef struct stringObject {
     int pid;
@@ -40,19 +41,36 @@ void freeString(char* input) {
     free(input);
 }
 
+// void printContainer(char* container[]) {
+//     printf("[");
+//     for (int i = 0; i < CONTAINER_SIZE; i++) {
+//         if (container[i] != NULL) {
+//             printf("NULL ");
+//         }
+//         else {
+//             printf("not null, ");
+//         }
+//     }
+//     printf("]");
+//     printf("\n");
+// }
+
 int main (int argc, char* argv[]) {
     bool quit = 0;
     int options = 0;
     int string_type = 0;
-    char temp_char = ' ';
+    int string_length;
+    //char temp_char = ' ';
     char custom_string[100];
+    //int CONTAINER_SIZE = 10;
+    char* container[CONTAINER_SIZE];
 
 
     // if (argc != 2) {
     //     printf("ERROR: You must enter the length of the string as an integer argument.\n");
     //     exit(1);
     // }
-    int string_length;
+    
 
     do {
         printf("Select an option:\n\n");
@@ -70,6 +88,8 @@ int main (int argc, char* argv[]) {
         switch (options) {
             case 1:
                 //create string
+                printContainer(container);
+
                 printf("Would you like to create a custom string, or generate a random string?\n\n");
                 printf("1: Custom String.\n");
                 printf("2: Random String.\n");
@@ -78,7 +98,7 @@ int main (int argc, char* argv[]) {
 
                 if (string_type == 1) {
                     printf("Enter a custom string.\n");
-                    int c; while ((c = getchar()) != '\n' && c != EOF);
+                    int c; while ((c = getchar()) != '\n' && c != EOF); //clears the previous new line before the fgets.
                     fgets(custom_string, 100, stdin);
                     printf("User input: %s\n", custom_string);
                 }
@@ -105,6 +125,7 @@ int main (int argc, char* argv[]) {
                 //print to paper
                 break;
             case 0:
+                printf("Exiting... \n");
                 quit = 1;
                 break;
             default:
